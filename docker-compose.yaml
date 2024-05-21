@@ -1,0 +1,30 @@
+# Docker compose
+version: '3.7'
+
+services:
+  mysql:
+    image: mysql:8.3
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: kpac
+    ports:
+      - "3306:3306"
+# Uncomment the following lines to persist the data in a local folder
+#    volumes:
+#      - ./mysql:/var/lib/mysql
+
+  tomcat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tomcat
+    restart: always
+    environment:
+      JDBC_URL: jdbc:mysql://mysql:3306/kpac
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+    depends_on:
+      - mysql
