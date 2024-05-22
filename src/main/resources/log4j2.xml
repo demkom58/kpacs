@@ -11,5 +11,6 @@
         </Root>
         <Logger name="org.springframework" level="DEBUG"/>
         <Logger name="org.apache.catalina" level="DEBUG"/>
+        <Logger name="com.aurosks.kpac_project" level="TRACE"/>
     </Loggers>
 </Configuration>
