@@ -35,7 +35,7 @@
     Specifies message source bean for i18n
     -->
     <beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <beans:property name="basename" value="classpath:i18n.messages"/>
+        <beans:property name="basename" value="classpath:i18n/messages"/>
         <beans:property name="defaultLocale" value="en"/>
         <beans:property name="defaultEncoding" value="UTF-8"/>
         <beans:property name="useCodeAsDefaultMessage" value="true"/>
@@ -53,5 +53,10 @@
             <beans:property name="paramName" value="language"/>
         </beans:bean>
     </mvc:interceptors>
+
+    <!--
+    Exception handling using Spring annotations
+    -->
+    <beans:bean class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver" />
 
 </beans:beans>
