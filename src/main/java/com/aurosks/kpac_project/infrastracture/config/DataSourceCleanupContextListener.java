@@ -1,4 +1,4 @@
-package com.aurosks.kpac_project.config;
+package com.aurosks.kpac_project.infrastracture.config;
 
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;

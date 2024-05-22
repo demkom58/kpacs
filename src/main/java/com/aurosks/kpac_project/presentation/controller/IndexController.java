@@ -1,4 +1,4 @@
-package com.aurosks.kpac_project.controller;
+package com.aurosks.kpac_project.presentation.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

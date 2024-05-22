@@ -1,4 +1,4 @@
-package com.aurosks.kpac_project.config;
+package com.aurosks.kpac_project.infrastracture.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -23,7 +23,7 @@ import javax.sql.DataSource;
 import java.util.Objects;
 
 @Configuration
-@EnableJdbcRepositories(basePackages = "com.aurosks.kpac_project.repository")
+@EnableJdbcRepositories(basePackages = "com.aurosks.kpac_project")
 @PropertySource("classpath:application.properties")
 public class DataJdbcConfiguration extends AbstractJdbcConfiguration {
     private static final Logger log = LoggerFactory.getLogger(DataJdbcConfiguration.class);
