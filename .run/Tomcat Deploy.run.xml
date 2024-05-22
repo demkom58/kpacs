@@ -1,12 +1,13 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Tomcat Deploy" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.24" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="21">
-    <option name="UPDATING_POLICY" value="restart-server" />
+  <configuration default="false" name="Tomcat Deploy" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.24" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="graalvm-21">
+    <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
+    <option name="UPDATING_POLICY" value="redeploy-artifacts" />
     <deployment>
-      <artifact name="kpac-project:war">
+      <file path="$PROJECT_DIR$/target/ROOT.war">
         <settings>
-          <option name="CONTEXT_PATH" value="/kpac_project_war" />
+          <option name="CONTEXT_PATH" value="" />
         </settings>
-      </artifact>
+      </file>
     </deployment>
     <server-settings>
       <option name="BASE_DIRECTORY_NAME" value="f55e324b-cc23-429f-9346-c50b6435292d" />
