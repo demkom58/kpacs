@@ -16,7 +16,11 @@
 
         <!-- Dependencies -->
         <spring-framework.version>6.1.7</spring-framework.version>
+        <aspectj.version>1.9.22.1</aspectj.version>
         <jakarta-annotations.version>3.0.0</jakarta-annotations.version>
+        <jakarta-validation.version>3.0.2</jakarta-validation.version>
+        <hibernate-validator.version>8.0.1.Final</hibernate-validator.version>
+        <jackson.version>2.17.1</jackson.version>
         <spring-data.version>2024.0.0</spring-data.version>
         <servlet-api.version>6.0.0</servlet-api.version>
         <jakarta-el.version>4.0.2</jakarta-el.version>
@@ -53,18 +57,62 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
+        <!-- Necessary for Core -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>${aspectj.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
             <groupId>jakarta.annotation</groupId>
             <artifactId>jakarta.annotation-api</artifactId>
             <version>${jakarta-annotations.version}</version>
+        </dependency>
+
+        <!-- Serialization & Validation -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>${jakarta-validation.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
         </dependency>
 
         <!-- Web -->
@@ -112,7 +160,7 @@
             <version>${log4j.version}</version>
         </dependency>
 
-        <!-- Test Artifacts -->
+        <!-- Tests -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -149,6 +197,7 @@
                 <version>3.4.0</version>
                 <configuration>
                     <failOnMissingWebXml>true</failOnMissingWebXml>
+                    <warName>ROOT</warName>
                 </configuration>
             </plugin>
             <!-- Groovy -->
