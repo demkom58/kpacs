@@ -4,8 +4,6 @@ import com.aurosks.kpac_project.domain.model.KPacCreateDto;
 import com.aurosks.kpac_project.infrastracture.entity.KPac;
 import com.aurosks.kpac_project.application.KPacService;
 import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,7 @@ public class KPacController {
     private final KPacService kpacService;
 
     @GetMapping("/kpacs")
-    public String get() {
+    public String getPage() {
         return "kpacs";
     }
 
