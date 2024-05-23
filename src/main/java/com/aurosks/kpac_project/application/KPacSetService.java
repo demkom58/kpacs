@@ -1,6 +1,7 @@
 package com.aurosks.kpac_project.application;
 
 
+import com.aurosks.kpac_project.application.exception.MessageException;
 import com.aurosks.kpac_project.domain.mapper.KPacSetMapper;
 import com.aurosks.kpac_project.domain.model.KPacRichSetDto;
 import com.aurosks.kpac_project.domain.model.KPacSetCreateDto;
@@ -12,6 +13,8 @@ import com.aurosks.kpac_project.infrastracture.repository.KPacRepository;
 import com.aurosks.kpac_project.infrastracture.repository.KPacRichSetRepository;
 import com.aurosks.kpac_project.infrastracture.repository.KPacSetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.data.relational.core.conversion.DbActionExecutionException;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
@@ -42,8 +45,15 @@ public class KPacSetService {
     }
 
     public void saveKPacSet(KPacSetCreateDto createDto) {
-        KPacSet entity = setMapper.toEntity(createDto);
-        setRepository.save(entity);
+        try {
+            KPacSet entity = setMapper.toEntity(createDto);
+            setRepository.save(entity);
+        } catch (
+                DbActionExecutionException e) {
+            if (e.getCause() instanceof DuplicateKeyException) {
+                throw new MessageException("msg.kpacSet.title.duplicate", e);
+            }
+        }
     }
 
     public void deleteKPacSet(long id) {
