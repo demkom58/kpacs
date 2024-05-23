@@ -30,7 +30,7 @@
                 }
             ];
 
-            const grid = initGrid("grid-container", {columns}, {
+            const grid = initGrid("grid-container", {columns, rowCss: _ => 'link-row'}, {
                 url: `${pageContext.request.contextPath}/api/sets`,
                 loadingId: "loading-indicator"
             });
