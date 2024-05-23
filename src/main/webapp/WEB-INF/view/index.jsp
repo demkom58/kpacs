@@ -7,8 +7,10 @@
     <title>Welcome To KPac resource</title>
 </head>
 <body>
-<h1>Pages:</h1>
-<a href="kpacs">Kpacs</a>
-<a href="sets">Kpac Sets</a>
+<div class="nav-container">
+    <span>Navigation: </span>
+    <a href="${pageContext.request.contextPath}/kpacs" class="nav-button">Kpacs</a>
+    <a href="${pageContext.request.contextPath}/sets" class="nav-button">Kpac Sets</a>
+</div>
 </body>
 </html>

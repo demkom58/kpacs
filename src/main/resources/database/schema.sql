@@ -2,28 +2,28 @@
 
 CREATE TABLE IF NOT EXISTS kpacs
 (
-    id            INT AUTO_INCREMENT PRIMARY KEY,
-    title         VARCHAR(250) NOT NULL,
-    description   VARCHAR(2000),
-    creation_date VARCHAR(10)  NOT NULL,
+    id            INT           NOT NULL AUTO_INCREMENT,
+    title         VARCHAR(250)  NOT NULL,
+    description   VARCHAR(2000) NOT NULL DEFAULT '',
+    creation_date VARCHAR(10)   NOT NULL,
+    PRIMARY KEY (id),
     UNIQUE (title),
     INDEX (id)
 );
 
 CREATE TABLE IF NOT EXISTS kpac_sets
 (
-    id    INT AUTO_INCREMENT PRIMARY KEY,
+    id    INT          NOT NULL AUTO_INCREMENT,
     title VARCHAR(250) NOT NULL,
+    PRIMARY KEY (id),
     UNIQUE (title),
     INDEX (id)
 );
 
 CREATE TABLE IF NOT EXISTS kpac_set_kpacs
 (
-    kpac_set_id INT,
-    kpac_id     INT,
+    kpac_set_id INT NOT NULL REFERENCES kpac_sets (id) ON DELETE CASCADE,
+    kpac_id     INT NOT NULL REFERENCES kpacs (id) ON DELETE CASCADE,
     PRIMARY KEY (kpac_set_id, kpac_id),
-    FOREIGN KEY (kpac_set_id) REFERENCES kpac_sets (id),
-    FOREIGN KEY (kpac_id) REFERENCES kpacs (id),
     INDEX (kpac_set_id)
 );

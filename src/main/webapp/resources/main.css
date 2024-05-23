@@ -12,3 +12,33 @@
 .icon-button:hover {
     color: #298cb3;
 }
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.form-container {
+    margin-bottom: 20px;
+}
+
+.form-container label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.form-container button {
+    margin-top: 10px;
+}
+
+#loading-indicator {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1000;
+}
