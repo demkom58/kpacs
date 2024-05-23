@@ -11,9 +11,15 @@ services:
       MYSQL_DATABASE: kpac
     ports:
       - "3306:3306"
-# Uncomment the following lines to persist the data in a local folder
-#    volumes:
-#      - ./mysql:/var/lib/mysql
+    volumes:
+      # Uncomment the following lines to persist the data in a local folder
+      #- ./mysql:/var/lib/mysql
+      - ./src/main/resources/database/schema.sql:/docker-entrypoint-initdb.d/1.sql:ro
+      - ./src/main/resources/database/data.sql:/docker-entrypoint-initdb.d/2.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
 
   tomcat:
     build:
@@ -27,4 +33,5 @@ services:
       - "8080:8080"
       - "8443:8443"
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
