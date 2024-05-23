@@ -13,9 +13,9 @@
 
         document.addEventListener("DOMContentLoaded", function () {
             const columns = [
-                {width: 50, id: "id", header: [{text: "K-PAC ID"}]},
-                {width: 200, id: "title", header: [{text: "Title"}]},
-                {width: 400, id: "description", header: [{text: "Description"}]},
+                {width: 50, id: "id", header: [{text: "K-PAC ID"}, {content: "inputFilter" }]},
+                {width: 200, id: "title", header: [{text: "Title"}, {content: "inputFilter" }]},
+                {width: 400, id: "description", header: [{text: "Description"}, {content: "inputFilter" }]},
                 {
                     width: 150, id: "creationDate", header: [{
                         text: "Creation Date", sortAs: timeFromDashedDDMMYYYY

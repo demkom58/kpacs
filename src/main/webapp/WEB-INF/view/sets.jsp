@@ -11,8 +11,8 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const columns = [
-                {width: 50, id: "id", header: [{text: "ID"}]},
-                {width: 200, id: "title", header: [{text: "Title"}]},
+                {width: 50, id: "id", header: [{text: "ID"}, {content: "inputFilter" }]},
+                {width: 200, id: "title", header: [{text: "Title"}, {content: "inputFilter" }]},
                 {
                     width: 100,
                     id: "delete",
