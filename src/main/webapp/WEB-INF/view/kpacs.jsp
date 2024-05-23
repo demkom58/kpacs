@@ -35,9 +35,11 @@
                         </a>`
                 }
             ];
-            initGrid("grid-container", columns,
-                `${pageContext.request.contextPath}/api/kpacs`,
-                deleteEntry, "loading-indicator");
+
+            initGrid("grid-container", {columns}, {
+                url: `${pageContext.request.contextPath}/api/kpacs`,
+                loadingId: "loading-indicator"
+            });
 
             reloadData();
         });

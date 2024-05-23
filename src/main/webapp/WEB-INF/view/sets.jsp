@@ -29,9 +29,11 @@
                         </a>`
                 }
             ];
-            const grid = initGrid("grid-container", columns,
-                `${pageContext.request.contextPath}/api/sets`,
-                deleteEntry, "loading-indicator");
+
+            const grid = initGrid("grid-container", {columns}, {
+                url: `${pageContext.request.contextPath}/api/sets`,
+                loadingId: "loading-indicator"
+            });
 
             grid.events.on("CellClick", (row, col) => {
                 if (col.id === 'delete') return

@@ -1,55 +1,53 @@
 let grid = null;
-let loadingIndicator = null;
-let defaultDataUrl = null;
-let defaultDataMapper = null;
+let dataConfig = {
+    url: null,
+    mapper: (data) => data,
+    loadingId: null
+}
 
 const showLoadingIndicator = () => {
-    if (loadingIndicator) {
-        loadingIndicator.style.display = 'block';
+    if (dataConfig.loadingId) {
+        document.getElementById(dataConfig.loadingId).style.display = 'block';
     }
 };
 
 const hideLoadingIndicator = () => {
-    if (loadingIndicator) {
-        loadingIndicator.style.display = 'none';
+    if (dataConfig.loadingId) {
+        document.getElementById(dataConfig.loadingId).style.display = 'none';
     }
 };
 
-const initGrid = (containerId, columns, dataUrl, deleteCallback, loadingId, dataMapper) => {
+const initGrid = (containerId, gridConfig, miscConfig) => {
     grid = new dhx.Grid(containerId, {
-        columns: columns,
         tooltip: false,
         headerRowHeight: 50,
+        ...gridConfig
     });
-
-    if (loadingId) {
-        loadingIndicator = document.getElementById(loadingId);
+    
+    dataConfig = {
+        ...dataConfig,
+        ...miscConfig
     }
 
-    defaultDataUrl = dataUrl;
-    defaultDataMapper = dataMapper == null ? (data) => data : dataMapper;
     return grid;
 };
 
-const reloadData = (dataUrl, mapper) => {
+const reloadData = () => {
     if (grid === null) return;
-    let url = dataUrl == null ? defaultDataUrl : dataUrl;
-    if (url == null) return;
+    if (dataConfig.url == null) return;
 
     grid.data.removeAll();
     showLoadingIndicator();
 
-    fetchGridData(url)
-        .then(async data => {
-            grid.data.parse(mapper == null ? defaultDataMapper(data) : mapper(data));
-        }).finally(() => hideLoadingIndicator());
+    fetchGridData()
+        .then(async data => grid.data.parse(dataConfig.mapper(data)))
+        .finally(() => hideLoadingIndicator());
 };
 
-const fetchGridData = (url) => {
-    let fetchUrl = url == null ? defaultDataUrl : url;
-    if (fetchUrl == null) return Promise.reject();
+const fetchGridData = () => {
+    if (dataConfig.url == null) return Promise.reject();
 
-    return fetch(fetchUrl, {method: 'GET', headers: {'Content-Type': 'application/json'}})
+    return fetch(dataConfig.url, {method: 'GET', headers: {'Content-Type': 'application/json'}})
         .then(async response => {
             if (!response.ok) {
                 alert((await response.json()).message);

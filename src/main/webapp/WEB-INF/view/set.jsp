@@ -24,13 +24,16 @@
             ];
 
             let dataEndpoint = `${pageContext.request.contextPath}/api/set/${id}`;
-            let grid = initGrid("grid-container", columns, dataEndpoint, deleteEntry,
-                "loading-indicator", (data) => data.pacs);
+            let grid = initGrid("grid-container", {columns}, {
+                url: dataEndpoint,
+                loadingId: "loading-indicator",
+                mapper: data => data.pacs,
+            });
 
             fetchGridData(dataEndpoint)
                 .then(data => {
                     document.getElementById("set-title").textContent = data.title;
-                    grid.data.parse(data.pacs);
+                    grid.data.parse(dataConfig.mapper(data));
                 }).finally(hideLoadingIndicator)
         });
     </script>
